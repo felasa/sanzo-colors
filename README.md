@@ -14,5 +14,5 @@ Color translations differ slightly from those mentioned but seem at a glance mos
 
 The dataset can be found in `out/sanzo-colors.json` and the script in `src/process_colors.clj`  
 
-Process can be executed with `clojure -M -m process-colors <ouput-filename>".
+Process can be executed with `clojure -M -m process-colors <ouput-filename>`.
 
