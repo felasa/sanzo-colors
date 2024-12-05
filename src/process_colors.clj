@@ -89,9 +89,8 @@
 
 (defn write! 
   [filename] 
-  (json/write data 
-              (io/writer (str "out/" filename)) 
-              {:indent true :escape-slash false}))
+  (spit (str "out/" filename)
+        (json/write-str data {:indent true :escape-slash false})))
 
 (comment
   (write! "sanzo-colors.json"))
