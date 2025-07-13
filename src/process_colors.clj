@@ -2,7 +2,8 @@
   "A simple script to process swatches into a single data file and include RGB conversions"
   (:require [clojure.data.json :as json] 
             [clojure.java.io :as io]
-            [clojure.math :as math]))
+            [clojure.math :as math]
+            [clojure.pprint :refer [pprint]]))
 
 (defn make-path 
   [swatch]
@@ -102,6 +103,9 @@
               (get-combo-info combo_id)))
 
 (def data {"colors" colors_l0 "combos" combos})
+(def data-edn 
+  {:colors (map #(update-keys % keyword) colors_l0)
+   :combos (map #(update-keys % keyword) combos)})
 
 (defn write! 
   [filename] 
@@ -109,7 +113,9 @@
         (json/write-str data {:indent true :escape-slash false})))
 
 (comment
-  (write! "sanzo-colors_hsb.json"))
+  (write! "sanzo-colors_hsb.json")
+  (spit "out/sanzo-colors.edn"
+        (with-out-str (pprint data-edn))))
 
 (defn -main
   "Invoke me with clojure -M -m process-colors filename"
